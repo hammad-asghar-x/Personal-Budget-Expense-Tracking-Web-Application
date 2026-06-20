@@ -1,0 +1,433 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: budgetAI.spec.ts >> request budget recommendation
+- Location: tests\e2e\specs\budgetAI.spec.ts:5:1
+
+# Error details
+
+```
+Test timeout of 60000ms exceeded.
+```
+
+```
+AggregateError: All promises were rejected
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - iframe [ref=e3]:
+    - generic [ref=f1e2]:
+      - generic [ref=f1e4]:
+        - generic [ref=f1e5]:
+          - img [ref=f1e7]
+          - generic [ref=f1e10]: Internal Server Error
+        - button "Copy as Markdown" [ref=f1e11] [cursor=pointer]:
+          - img [ref=f1e12]
+          - generic [ref=f1e15]: Copy as Markdown
+      - generic [ref=f1e18]:
+        - generic [ref=f1e19]:
+          - heading "TypeError" [level=1] [ref=f1e20]
+          - paragraph [ref=f1e21]: "App\\Services\\BudgetAIService::getBudgetRecommendation(): Argument #1 ($categoryId) must be of type ?int, string given, called in D:\\6 Semester\\AST\\Project\\app\\Livewire\\BudgetForm.php on line 172"
+        - generic [ref=f1e22]:
+          - generic [ref=f1e23]:
+            - generic [ref=f1e24]:
+              - generic [ref=f1e25]: LARAVEL
+              - generic [ref=f1e26]: 12.34.0
+            - generic [ref=f1e27]:
+              - generic [ref=f1e28]: PHP
+              - generic [ref=f1e29]: 8.3.31
+          - generic [ref=f1e30]:
+            - img [ref=f1e31]
+            - text: UNHANDLED
+          - generic [ref=f1e34]: CODE 0
+        - generic [ref=f1e36]:
+          - generic [ref=f1e37]:
+            - img [ref=f1e38]
+            - text: "500"
+          - generic [ref=f1e41]:
+            - img [ref=f1e42]
+            - text: POST
+          - generic [ref=f1e46]: http://localhost:8000/livewire/update
+          - button [ref=f1e47] [cursor=pointer]:
+            - img [ref=f1e48]
+      - generic [ref=f1e52]:
+        - generic [ref=f1e53]:
+          - generic [ref=f1e54]:
+            - img [ref=f1e56]
+            - heading "Exception trace" [level=3] [ref=f1e59]
+          - generic [ref=f1e60]:
+            - generic [ref=f1e61]:
+              - generic [ref=f1e62] [cursor=pointer]:
+                - generic [ref=f1e65]:
+                  - code [ref=f1e69]:
+                    - generic [ref=f1e70]: App\Services\BudgetAIService->getBudgetRecommendation(string, integer, string, string)
+                  - generic [ref=f1e72]: app\Services\BudgetAIService.php:12
+                - button [ref=f1e74]:
+                  - img [ref=f1e75]
+              - code [ref=f1e83]:
+                - generic [ref=f1e84]: 7use App\Models\Category;
+                - generic [ref=f1e85]: 8use Gemini\Laravel\Facades\Gemini;
+                - generic [ref=f1e86]: 9use Illuminate\Support\Facades\Log;
+                - generic [ref=f1e87]: "10"
+                - generic [ref=f1e88]: "11class BudgetAIService {"
+                - generic [ref=f1e89]: "12 public function getBudgetRecommendation(?int $categoryId, int $userId, int $month, int $year): ?array {"
+                - generic [ref=f1e90]: "13 try {"
+                - generic [ref=f1e91]: 14 // get hostorical spending data
+                - generic [ref=f1e92]: 15 $historicalData = $this->getHistoricalSpending( $categoryId, $userId, $month, $year);
+                - generic [ref=f1e93]: "16"
+                - generic [ref=f1e94]: "17 if (empty($historicalData)) {"
+                - generic [ref=f1e95]: 18 return null;
+                - generic [ref=f1e96]: "19 }"
+                - generic [ref=f1e97]: "20"
+                - generic [ref=f1e98]: 21 //create prompt
+                - generic [ref=f1e99]: 22 $prompt = $this->createPrompt( $historicalData,
+                - generic [ref=f1e100]: 23 $categoryId,
+                - generic [ref=f1e101]: "24"
+            - generic [ref=f1e103] [cursor=pointer]:
+              - generic [ref=f1e106]:
+                - code [ref=f1e110]:
+                  - generic [ref=f1e111]: App\Livewire\BudgetForm->getAIRecommendation()
+                - generic [ref=f1e113]: app\Livewire\BudgetForm.php:172
+              - button [ref=f1e115]:
+                - img [ref=f1e116]
+            - generic [ref=f1e121] [cursor=pointer]:
+              - img [ref=f1e122]
+              - generic [ref=f1e126]: 57 vendor frames
+              - button [ref=f1e127]:
+                - img [ref=f1e128]
+            - generic [ref=f1e133] [cursor=pointer]:
+              - generic [ref=f1e136]:
+                - code [ref=f1e140]:
+                  - generic [ref=f1e141]: public\index.php
+                - generic [ref=f1e143]: public\index.php:20
+              - button [ref=f1e145]:
+                - img [ref=f1e146]
+            - generic [ref=f1e151] [cursor=pointer]:
+              - img [ref=f1e152]
+              - generic [ref=f1e156]: 1 vendor frame
+              - button [ref=f1e157]:
+                - img [ref=f1e158]
+        - generic [ref=f1e162]:
+          - generic [ref=f1e163]:
+            - generic [ref=f1e164]:
+              - img [ref=f1e166]
+              - heading "Queries" [level=3] [ref=f1e168]
+            - generic [ref=f1e170]: 1-4 of 4
+          - generic [ref=f1e171]:
+            - generic [ref=f1e172]:
+              - generic [ref=f1e173]:
+                - generic [ref=f1e174]:
+                  - img [ref=f1e175]
+                  - generic [ref=f1e177]: sqlite
+                - code [ref=f1e181]:
+                  - generic [ref=f1e182]: select * from "sessions" where "id" = 'fk09liTtSd8BUFsDvxe7pYlhMyFN0zSLBopp02An' limit 1
+              - generic [ref=f1e183]: 6.9ms
+            - generic [ref=f1e184]:
+              - generic [ref=f1e185]:
+                - generic [ref=f1e186]:
+                  - img [ref=f1e187]
+                  - generic [ref=f1e189]: sqlite
+                - code [ref=f1e193]:
+                  - generic [ref=f1e194]: select * from "users" where "id" = 2 limit 1
+              - generic [ref=f1e195]: 0.4ms
+            - generic [ref=f1e196]:
+              - generic [ref=f1e197]:
+                - generic [ref=f1e198]:
+                  - img [ref=f1e199]
+                  - generic [ref=f1e201]: sqlite
+                - code [ref=f1e205]:
+                  - generic [ref=f1e206]: select count(*) as aggregate from "expenses" where "user_id" = 2 and strftime('%Y-%m-%d', "date") >= cast('2026-03-17' as text) and strftime('%Y-%m-%d', "date") <= cast('2026-06-17' as text) and "expenses"."deleted_at" is null
+              - generic [ref=f1e207]: 0.86ms
+            - generic [ref=f1e208]:
+              - generic [ref=f1e209]:
+                - generic [ref=f1e210]:
+                  - img [ref=f1e211]
+                  - generic [ref=f1e213]: sqlite
+                - code [ref=f1e217]:
+                  - generic [ref=f1e218]: select count(*) as aggregate from "expenses" where "user_id" = 2 and strftime('%Y-%m-%d', "date") >= cast('2026-03-17' as text) and strftime('%Y-%m-%d', "date") <= cast('2026-06-17' as text) and "expenses"."deleted_at" is null
+              - generic [ref=f1e219]: 1.06ms
+      - generic [ref=f1e221]:
+        - generic [ref=f1e222]:
+          - heading "Headers" [level=2] [ref=f1e223]
+          - generic [ref=f1e224]:
+            - generic [ref=f1e225]:
+              - generic [ref=f1e226]: host
+              - generic [ref=f1e228]: localhost:8000
+            - generic [ref=f1e229]:
+              - generic [ref=f1e230]: user-agent
+              - generic [ref=f1e232]: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:150.0.2) Gecko/20100101 Firefox/150.0.2
+            - generic [ref=f1e233]:
+              - generic [ref=f1e234]: accept
+              - generic [ref=f1e236]: "*/*"
+            - generic [ref=f1e237]:
+              - generic [ref=f1e238]: accept-language
+              - generic [ref=f1e240]: en-US
+            - generic [ref=f1e241]:
+              - generic [ref=f1e242]: accept-encoding
+              - generic [ref=f1e244]: gzip, deflate, br, zstd
+            - generic [ref=f1e245]:
+              - generic [ref=f1e246]: referer
+              - generic [ref=f1e248]: http://localhost:8000/budgets/create
+            - generic [ref=f1e249]:
+              - generic [ref=f1e250]: content-type
+              - generic [ref=f1e252]: application/json
+            - generic [ref=f1e254]: x-livewire
+            - generic [ref=f1e256]:
+              - generic [ref=f1e257]: content-length
+              - generic [ref=f1e259]: "689"
+            - generic [ref=f1e260]:
+              - generic [ref=f1e261]: origin
+              - generic [ref=f1e263]: http://localhost:8000
+            - generic [ref=f1e264]:
+              - generic [ref=f1e265]: connection
+              - generic [ref=f1e267]: keep-alive
+            - generic [ref=f1e268]:
+              - generic [ref=f1e269]: cookie
+              - generic [ref=f1e271]: XSRF-TOKEN=eyJpdiI6Ik1EWktZbjVtWHZRL2UxV0tCSFlUdHc9PSIsInZhbHVlIjoiZm92bFErTmlYUHNuWjBqcnB1S2pFc2V5cTk2UEpGRFJTcDNBZ3FubjBoektHWWwzTnFPWmdta2ZLVWxod0R0Y1dNcTRpTWVtTWlqM0RRem92emZaNWZZelB5SmRObUt0L2RQa2dPcmxZL3EzalBLcTh5UWl6Q3NubkI2S25jV3oiLCJtYWMiOiJhZjlkMzI3Y2I2OTUwMDQzOWU2YjU3ZWRmZGEzODFjM2ZkODU2ZjBiMWE1MDAwNWY0MDFhMGYyZDM0OWM1ZGQ2IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6Imp0TlgvM2NqQXhURkVjMW41b2RqSmc9PSIsInZhbHVlIjoiZ2ZLZFl1RnFZYzNRWUhSSEs3TmNRVkF2MXhJZ3NWRlBpRmwxQWhXQ0FCdmc4d0UrYnVyeE5FYTFJMUtZRzFVTU9jbHEyZzJERnFNbEJURSt2UVg1OGdwa1doVmJscllaYko1WFNaMnFUcFQwNEQzRU1TTFcyN3FZQ1VqQ2Z3UWYiLCJtYWMiOiJjNDgxNmFhMmU5YWE4M2E2NmI1OGE3YWExZWY5ZTc5OGQ3ZGQzNTViZDc1OWNkZmFhMTUwZjgyMGRkMjBiMjQ5IiwidGFnIjoiIn0%3D
+            - generic [ref=f1e272]:
+              - generic [ref=f1e273]: sec-fetch-dest
+              - generic [ref=f1e275]: empty
+            - generic [ref=f1e276]:
+              - generic [ref=f1e277]: sec-fetch-mode
+              - generic [ref=f1e279]: cors
+            - generic [ref=f1e280]:
+              - generic [ref=f1e281]: sec-fetch-site
+              - generic [ref=f1e283]: same-origin
+            - generic [ref=f1e284]:
+              - generic [ref=f1e285]: priority
+              - generic [ref=f1e287]: u=4
+        - generic [ref=f1e288]:
+          - heading "Body" [level=2] [ref=f1e289]
+          - code [ref=f1e294]:
+            - generic [ref=f1e295]: "{"
+            - generic [ref=f1e296]: "\"_token\": \"5wj1BIsKy8Wt4Ak8dFZZJZ6jaI5PBVi3Ao2iDvsi\","
+            - generic [ref=f1e297]: "\"components\": ["
+            - generic [ref=f1e298]: "{"
+            - generic [ref=f1e299]: "\"snapshot\": \"{\"data\":{\"budgetId\":null,\"amount\":\"\",\"month\":6,\"year\":2026,\"category_id\":\"\",\"isEdit\":false,\"aiRecommendation\":null,\"showAIRecommendation\":false,\"loadingRecommendation\":false,\"hasHistoricalData\":true},\"memo\":{\"id\":\"868Z5lroyYiG1OoiQZLI\",\"name\":\"budget-form\",\"path\":\"budgets/create\",\"method\":\"GET\",\"children\":[],\"scripts\":[],\"assets\":[],\"errors\":[],\"locale\":\"en\"},\"checksum\":\"4dada26c4441145d299dd5f6488feee786a9b1721003b533b823997470f40098\"}\","
+            - generic [ref=f1e300]: "\"updates\": {"
+            - generic [ref=f1e301]: "\"month\": \"5\","
+            - generic [ref=f1e302]: "\"year\": \"2026\""
+            - generic [ref=f1e303]: "},"
+            - generic [ref=f1e304]: "\"calls\": ["
+            - generic [ref=f1e305]: "{"
+            - generic [ref=f1e306]: "\"path\": \"\","
+            - generic [ref=f1e307]: "\"method\": \"getAIRecommendation\","
+            - generic [ref=f1e308]: "\"params\": []"
+            - generic [ref=f1e309]: "}"
+            - generic [ref=f1e310]: "]"
+            - generic [ref=f1e311]: "}"
+            - generic [ref=f1e312]: "]"
+            - generic [ref=f1e313]: "}"
+        - generic [ref=f1e314]:
+          - heading "Routing" [level=2] [ref=f1e315]
+          - generic [ref=f1e316]:
+            - generic [ref=f1e317]:
+              - generic [ref=f1e318]: controller
+              - generic [ref=f1e320]: Livewire\Mechanisms\HandleRequests\HandleRequests@handleUpdate
+            - generic [ref=f1e321]:
+              - generic [ref=f1e322]: route name
+              - generic [ref=f1e324]: livewire.update
+            - generic [ref=f1e325]:
+              - generic [ref=f1e326]: middleware
+              - generic [ref=f1e328]: web
+        - generic [ref=f1e329]:
+          - heading "Routing parameters" [level=2] [ref=f1e330]
+          - generic [ref=f1e331]: // No routing parameters
+      - generic [ref=f1e334]:
+        - img [ref=f1e336]
+        - img [ref=f1e338]
+  - generic [ref=e4]:
+    - link "Laravel" [ref=e5] [cursor=pointer]:
+      - /url: http://localhost:8000/dashboard
+      - img [ref=e7]
+      - generic [ref=e12]: Laravel
+    - navigation [ref=e13]:
+      - generic [ref=e14]:
+        - generic [ref=e16]: Platform
+        - generic [ref=e17]:
+          - link "Dashboard" [ref=e18] [cursor=pointer]:
+            - /url: http://localhost:8000/dashboard
+            - img [ref=e20]
+            - generic [ref=e22]: Dashboard
+          - link "Categories" [ref=e23] [cursor=pointer]:
+            - /url: http://localhost:8000/categories
+            - img [ref=e25]
+            - generic [ref=e27]: Categories
+          - link "Budgets" [ref=e28] [cursor=pointer]:
+            - /url: http://localhost:8000/budgets
+            - img [ref=e30]
+            - generic [ref=e32]: Budgets
+          - link "Expenses" [ref=e33] [cursor=pointer]:
+            - /url: http://localhost:8000/expenses
+            - img [ref=e35]
+            - generic [ref=e37]: Expenses
+          - link "Recurring Expenses" [ref=e38] [cursor=pointer]:
+            - /url: http://localhost:8000/recurring-expenses
+            - img [ref=e40]
+            - generic [ref=e42]: Recurring Expenses
+    - navigation [ref=e44]:
+      - link "Repository" [ref=e45] [cursor=pointer]:
+        - /url: https://github.com/laravel/livewire-starter-kit
+        - img [ref=e47]
+        - generic [ref=e52]: Repository
+      - link "Documentation" [ref=e53] [cursor=pointer]:
+        - /url: https://laravel.com/docs/starter-kits#livewire
+        - img [ref=e55]
+        - generic [ref=e62]: Documentation
+    - button "HA Hammad Asghar" [ref=e64]:
+      - generic [ref=e67]: HA
+      - generic [ref=e68]: Hammad Asghar
+      - img [ref=e70]
+  - generic [ref=e74]:
+    - generic [ref=e77]:
+      - generic [ref=e78]:
+        - heading "Create New Budget" [level=1] [ref=e79]
+        - paragraph [ref=e80]: Set spending limits for better financial control
+      - link [ref=e81] [cursor=pointer]:
+        - /url: /budgets
+        - img [ref=e82]
+    - generic [ref=e84]:
+      - generic [ref=e85]:
+        - generic [ref=e86]:
+          - heading "Budget Period" [level=3] [ref=e87]:
+            - img [ref=e88]
+            - text: Budget Period
+          - generic [ref=e90]:
+            - generic [ref=e91]:
+              - generic [ref=e92]: Month *
+              - combobox "Month *" [ref=e93]:
+                - option "Select Month"
+                - option "January"
+                - option "February"
+                - option "March"
+                - option "April"
+                - option "May" [selected]
+                - option "June"
+                - option "July"
+                - option "August"
+                - option "September"
+                - option "October"
+                - option "November"
+                - option "December"
+            - generic [ref=e94]:
+              - generic [ref=e95]: Year *
+              - combobox "Year *" [ref=e96]:
+                - option "Select Year"
+                - option "2025"
+                - option "2026" [selected]
+                - option "2027"
+                - option "2028"
+        - generic [ref=e97]:
+          - heading "Budget Details" [level=3] [ref=e98]:
+            - img [ref=e99]
+            - text: Budget Details
+          - generic [ref=e101]:
+            - generic [ref=e102]:
+              - generic [ref=e103]: Category
+              - combobox "Category" [ref=e104]:
+                - option "Overall Budget (All Categories)" [selected]
+                - option "Books & Stationery"
+                - option "EditCat-1781680254101"
+                - option "EditCat-1781680286873"
+                - option "EditCat-1781680456957"
+                - option "EditCat-1781680517163"
+                - option "EditCat-1781680589238"
+                - option "EditCat-1781680612761"
+                - option "EditCat-1781680649209"
+                - option "EditCat-1781680683932"
+                - option "EditCat-1781680717465"
+                - option "EditCat-1781680738270"
+                - option "EditCat-1781680763673"
+                - option "EditCat-1781680788309"
+                - option "Entertainment"
+                - option "Food & Chai"
+                - option "Hostel & Rent"
+                - option "Mobile & Internet"
+                - option "RemoveCat-1781680271338"
+                - option "RemoveCat-1781680297497"
+                - option "TestCat-1781288243162"
+                - option "TestCat-1781288334353"
+                - option "TestCat-1781288402472"
+                - option "TestCat-1781288416663"
+                - option "TestCat-1781288575427"
+                - option "TestCat-1781292037181"
+                - option "TestCat-1781340636832"
+                - option "TestCat-1781340709686"
+                - option "TestCat-1781340980929"
+                - option "TestCat-1781341078699"
+                - option "TestCat-1781680250660"
+                - option "TestCat-1781680450758"
+                - option "TestCat-1781681386978"
+                - option "Transport"
+                - option "University"
+              - paragraph [ref=e105]: Leave blank to create an overall budget, or select a category for specific tracking.
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: Budget Amount *
+                - button "✨ Get AI Suggestion" [ref=e109]:
+                  - img [ref=e110]
+                  - generic [ref=e112]: ✨ Get AI Suggestion
+              - generic [ref=e113]:
+                - generic:
+                  - generic: $
+                - spinbutton "Budget Amount *" [ref=e114]
+        - generic [ref=e116]:
+          - img [ref=e117]
+          - generic [ref=e119]:
+            - heading "💡 Budget Tips" [level=4] [ref=e120]
+            - list [ref=e121]:
+              - listitem [ref=e122]:
+                - text: •
+                - strong [ref=e123]: "Start with historical data:"
+                - text: Review your past spending to set realistic budgets
+              - listitem [ref=e124]:
+                - text: •
+                - strong [ref=e125]: "Use the 50/30/20 rule:"
+                - text: 50% needs, 30% wants, 20% savings
+              - listitem [ref=e126]:
+                - text: •
+                - strong [ref=e127]: "Build in buffer:"
+                - text: Add 10% extra for unexpected expenses
+              - listitem [ref=e128]:
+                - text: •
+                - strong [ref=e129]: "Track regularly:"
+                - text: Check your progress weekly to stay on target
+              - listitem [ref=e130]:
+                - text: •
+                - strong [ref=e131]: "Overall budgets:"
+                - text: Track total spending across all categories
+        - generic [ref=e132]:
+          - link "Cancel" [ref=e133] [cursor=pointer]:
+            - /url: /budgets
+          - button "Create Budget" [ref=e134]:
+            - img [ref=e135]
+            - text: Create Budget
+      - generic [ref=e137]:
+        - heading "Budget Examples" [level=3] [ref=e138]
+        - generic [ref=e139]:
+          - generic [ref=e140]:
+            - paragraph [ref=e141]: 🍔 Food & Dining
+            - paragraph [ref=e142]: "Recommended: $400-600/month"
+            - paragraph [ref=e143]: Includes groceries, restaurants, and coffee
+          - generic [ref=e144]:
+            - paragraph [ref=e145]: 🚗 Transportation
+            - paragraph [ref=e146]: "Recommended: $200-400/month"
+            - paragraph [ref=e147]: Gas, insurance, maintenance, public transit
+          - generic [ref=e148]:
+            - paragraph [ref=e149]: 🎬 Entertainment
+            - paragraph [ref=e150]: "Recommended: $100-200/month"
+            - paragraph [ref=e151]: Movies, concerts, hobbies, subscriptions
+          - generic [ref=e152]:
+            - paragraph [ref=e153]: 🛒 Shopping
+            - paragraph [ref=e154]: "Recommended: $150-300/month"
+            - paragraph [ref=e155]: Clothes, electronics, household items
+        - paragraph [ref=e156]: "* These are general guidelines. Adjust based on your income and lifestyle."
+```
