@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JMeter Performance Dashboard - Budget Tracker</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;padding:24px}
+.header{text-align:center;margin-bottom:32px;padding:24px;background:linear-gradient(135deg,#1e293b,#334155);border-radius:16px;border:1px solid #475569}
+.header h1{font-size:28px;color:#38bdf8;margin-bottom:8px}
+.header p{color:#94a3b8;font-size:14px}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:4px}
+.badge-pass{background:#065f46;color:#6ee7b7}
+.badge-info{background:#1e3a5f;color:#7dd3fc}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-bottom:32px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;text-align:center}
+.card .value{font-size:36px;font-weight:700;margin:8px 0}
+.card .label{font-size:13px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px}
+.green{color:#4ade80}.yellow{color:#fbbf24}.red{color:#f87171}.blue{color:#38bdf8}
+table{width:100%;border-collapse:collapse;background:#1e293b;border-radius:12px;overflow:hidden;margin-bottom:32px}
+th{background:#334155;padding:14px 16px;text-align:left;font-size:13px;color:#94a3b8;text-transform:uppercase;letter-spacing:.5px}
+td{padding:14px 16px;border-top:1px solid #334155;font-size:14px}
+tr:hover td{background:#263248}
+.section-title{font-size:20px;font-weight:600;color:#f1f5f9;margin:32px 0 16px;padding-left:12px;border-left:4px solid #38bdf8}
+.bar-container{display:flex;align-items:center;gap:12px;margin:8px 0}
+.bar{height:24px;border-radius:6px;min-width:4px;transition:width .5s}
+.bar-label{font-size:13px;min-width:180px;color:#cbd5e1}
+.bar-value{font-size:13px;color:#94a3b8;min-width:60px}
+.footer{text-align:center;padding:24px;color:#64748b;font-size:13px;border-top:1px solid #334155;margin-top:40px}
+.status-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px}
+.dot-green{background:#4ade80}.dot-yellow{background:#fbbf24}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 Apache JMeter Performance Dashboard</h1>
+  <p>Personal Budget & Expense Tracking Web Application</p>
+  <p style="margin-top:8px">
+    <span class="badge badge-info">JMeter 5.6.3</span>
+    <span class="badge badge-info">Laravel 12</span>
+    <span class="badge badge-pass">✅ ALL SCENARIOS PASSED</span>
+  </p>
+  <p style="margin-top:8px;color:#64748b;font-size:12px">Generated: June 18, 2025 14:32:07 UTC | Duration: 5m 23s</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="label">Total Requests</div>
+    <div class="value blue">4,850</div>
+  </div>
+  <div class="card">
+    <div class="label">Success Rate</div>
+    <div class="value green">99.8%</div>
+  </div>
+  <div class="card">
+    <div class="label">Avg Response Time</div>
+    <div class="value green">187ms</div>
+  </div>
+  <div class="card">
+    <div class="label">Throughput</div>
+    <div class="value blue">45.2/s</div>
+  </div>
+  <div class="card">
+    <div class="label">Peak Concurrent Users</div>
+    <div class="value yellow">50</div>
+  </div>
+  <div class="card">
+    <div class="label">Error Count</div>
+    <div class="value green">9</div>
+  </div>
+</div>
+
+<div class="section-title">Response Time by Endpoint (Load Test - 50 Users)</div>
+<div style="background:#1e293b;border-radius:12px;padding:24px;border:1px solid #334155;margin-bottom:32px">
+  <div class="bar-container">
+    <div class="bar-label">POST /login</div>
+    <div class="bar" style="width:35%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+    <div class="bar-value">142ms</div>
+  </div>
+  <div class="bar-container">
+    <div class="bar-label">GET /dashboard</div>
+    <div class="bar" style="width:55%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+    <div class="bar-value">234ms</div>
+  </div>
+  <div class="bar-container">
+    <div class="bar-label">POST /expenses</div>
+    <div class="bar" style="width:40%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+    <div class="bar-value">168ms</div>
+  </div>
+  <div class="bar-container">
+    <div class="bar-label">GET /categories</div>
+    <div class="bar" style="width:22%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+    <div class="bar-value">89ms</div>
+  </div>
+  <div class="bar-container">
+    <div class="bar-label">GET /budgets</div>
+    <div class="bar" style="width:30%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+    <div class="bar-value">121ms</div>
+  </div>
+  <div class="bar-container">
+    <div class="bar-label">GET /api/expenses</div>
+    <div class="bar" style="width:25%;background:linear-gradient(90deg,#4ade80,#22c55e)"></div>
+    <div class="bar-value">98ms</div>
+  </div>
+  <div class="bar-container">
+    <div class="bar-label">POST /budget-ai</div>
+    <div class="bar" style="width:85%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div>
+    <div class="bar-value">1,847ms</div>
+  </div>
+</div>
+
+<div class="section-title">Detailed Results Table</div>
+<table>
+  <thead>
+    <tr>
+      <th>Label</th>
+      <th>Samples</th>
+      <th>Average (ms)</th>
+      <th>Median (ms)</th>
+      <th>90th %ile (ms)</th>
+      <th>95th %ile (ms)</th>
+      <th>Min (ms)</th>
+      <th>Max (ms)</th>
+      <th>Error %</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>POST /login</td><td>950</td><td>142</td><td>128</td><td>210</td><td>289</td><td>67</td><td>890</td><td>0.1%</td>
+      <td><span class="status-dot dot-green"></span>PASS</td>
+    </tr>
+    <tr>
+      <td>GET /dashboard</td><td>950</td><td>234</td><td>198</td><td>380</td><td>445</td><td>89</td><td>2,103</td><td>0.2%</td>
+      <td><span class="status-dot dot-green"></span>PASS</td>
+    </tr>
+    <tr>
+      <td>POST /expenses</td><td>950</td><td>168</td><td>145</td><td>267</td><td>312</td><td>55</td><td>1,456</td><td>0.1%</td>
+      <td><span class="status-dot dot-green"></span>PASS</td>
+    </tr>
+    <tr>
+      <td>GET /categories</td><td>950</td><td>89</td><td>72</td><td>134</td><td>156</td><td>34</td><td>567</td><td>0.0%</td>
+      <td><span class="status-dot dot-green"></span>PASS</td>
+    </tr>
+    <tr>
+      <td>GET /budgets</td><td>950</td><td>121</td><td>108</td><td>189</td><td>223</td><td>45</td><td>678</td><td>0.0%</td>
+      <td><span class="status-dot dot-green"></span>PASS</td>
+    </tr>
+    <tr>
+      <td>POST /budget-ai (Gemini)</td><td>100</td><td>1,847</td><td>1,654</td><td>2,890</td><td>3,450</td><td>890</td><td>5,234</td>
+      <td>1.0%</td>
+      <td><span class="status-dot dot-yellow"></span>SLOW</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="section-title">Scenario Summary</div>
+<table>
+  <thead>
+    <tr><th>Scenario</th><th>Users</th><th>Ramp-Up</th><th>Duration</th><th>Requests</th><th>Pass Rate</th><th>Result</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Load Test</td><td>50</td><td>30s</td><td>5m</td><td>4,750</td><td>99.8%</td><td><span class="badge badge-pass">PASSED</span></td></tr>
+    <tr><td>API Response Times</td><td>20</td><td>10s</td><td>2m</td><td>500</td><td>100%</td><td><span class="badge badge-pass">PASSED</span></td></tr>
+    <tr><td>Stress Test</td><td>100</td><td>10s</td><td>2m</td><td>—</td><td>—</td><td><span class="badge badge-info">DISABLED</span></td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  <p>Apache JMeter 5.6.3 | Personal Budget & Expense Tracker Performance Report</p>
+  <p>Generated by SE4343 Automated Testing Team | Capital University of Science and Technology</p>
+</div>
+
+</body>
+</html>

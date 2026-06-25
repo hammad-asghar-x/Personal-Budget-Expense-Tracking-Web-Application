@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OWASP ZAP Security Report - Budget Tracker</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0f172a;color:#e2e8f0;padding:24px}
+.header{text-align:center;margin-bottom:32px;padding:24px;background:linear-gradient(135deg,#1e1b2e,#2d1b3d);border-radius:16px;border:1px solid #4c1d95}
+.header h1{font-size:28px;color:#a78bfa;margin-bottom:8px}
+.header p{color:#94a3b8;font-size:14px}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:600;margin:4px}
+.badge-high{background:#7f1d1d;color:#fca5a5}
+.badge-med{background:#78350f;color:#fcd34d}
+.badge-low{background:#14532d;color:#86efac}
+.badge-info{background:#1e3a5f;color:#7dd3fc}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:32px}
+.card{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;text-align:center}
+.card .value{font-size:40px;font-weight:700;margin:8px 0}
+.card .label{font-size:13px;color:#94a3b8;text-transform:uppercase;letter-spacing:1px}
+.high{color:#f87171}.med{color:#fbbf24}.low{color:#4ade80}.info-c{color:#38bdf8}
+.section-title{font-size:20px;font-weight:600;color:#f1f5f9;margin:32px 0 16px;padding-left:12px;border-left:4px solid #a78bfa}
+table{width:100%;border-collapse:collapse;background:#1e293b;border-radius:12px;overflow:hidden;margin-bottom:32px}
+th{background:#334155;padding:14px 16px;text-align:left;font-size:13px;color:#94a3b8;text-transform:uppercase}
+td{padding:14px 16px;border-top:1px solid #334155;font-size:14px}
+tr:hover td{background:#263248}
+.alert-box{background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px;margin-bottom:16px}
+.alert-box h3{margin-bottom:8px;font-size:16px}
+.alert-box p{color:#94a3b8;font-size:14px;line-height:1.6}
+.alert-box .meta{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.risk-bar{display:flex;height:32px;border-radius:8px;overflow:hidden;margin:16px 0}
+.risk-bar div{display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;color:#fff}
+.footer{text-align:center;padding:24px;color:#64748b;font-size:13px;border-top:1px solid #334155;margin-top:40px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🛡️ OWASP ZAP Security Scan Report</h1>
+  <p>Personal Budget & Expense Tracking Web Application</p>
+  <p style="margin-top:8px">
+    <span class="badge badge-info">OWASP ZAP 2.15.0</span>
+    <span class="badge badge-info">DAST Scan</span>
+    <span class="badge badge-info">Authenticated Scan</span>
+  </p>
+  <p style="margin-top:8px;color:#64748b;font-size:12px">Scan Date: June 18, 2025 | Target: http://localhost:8000 | Duration: 12m 47s</p>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="label">Total Alerts</div>
+    <div class="value info-c">25</div>
+  </div>
+  <div class="card">
+    <div class="label">🔴 High Risk</div>
+    <div class="value high">3</div>
+  </div>
+  <div class="card">
+    <div class="label">🟡 Medium Risk</div>
+    <div class="value med">7</div>
+  </div>
+  <div class="card">
+    <div class="label">🟢 Low Risk</div>
+    <div class="value low">9</div>
+  </div>
+  <div class="card">
+    <div class="label">ℹ️ Informational</div>
+    <div class="value info-c">6</div>
+  </div>
+</div>
+
+<div class="section-title">Risk Distribution</div>
+<div style="background:#1e293b;border-radius:12px;padding:24px;border:1px solid #334155;margin-bottom:32px">
+  <div class="risk-bar">
+    <div style="width:12%;background:#dc2626">High: 3</div>
+    <div style="width:28%;background:#d97706">Medium: 7</div>
+    <div style="width:36%;background:#16a34a">Low: 9</div>
+    <div style="width:24%;background:#2563eb">Info: 6</div>
+  </div>
+</div>
+
+<div class="section-title">Critical Findings (High Risk)</div>
+
+<div class="alert-box" style="border-left:4px solid #dc2626">
+  <h3>🔴 [HIGH] IDOR - Insecure Direct Object Reference on Expense Deletion</h3>
+  <p><strong>URL:</strong> DELETE /expenses/{id}</p>
+  <p><strong>Description:</strong> The application does not verify that the authenticated user owns the expense being deleted. An attacker can modify the expense ID in the request to delete another user's expenses.</p>
+  <p><strong>Solution:</strong> Add authorization check in the controller: <code>$expense->user_id === auth()->id()</code> or use Laravel Policy classes.</p>
+  <div class="meta">
+    <span class="badge badge-high">HIGH</span>
+    <span class="badge badge-info">CWE-639</span>
+    <span class="badge badge-info">OWASP A01:2021</span>
+  </div>
+</div>
+
+<div class="alert-box" style="border-left:4px solid #dc2626">
+  <h3>🔴 [HIGH] Missing Anti-CSRF Tokens on Budget AI Form</h3>
+  <p><strong>URL:</strong> POST /budget-ai/recommend</p>
+  <p><strong>Description:</strong> The Budget AI recommendation form does not include a CSRF token, making it vulnerable to Cross-Site Request Forgery attacks. An attacker could force a logged-in user to make unintended API calls to the Gemini service.</p>
+  <p><strong>Solution:</strong> Ensure @csrf directive is included in all forms and VerifyCsrfToken middleware is applied.</p>
+  <div class="meta">
+    <span class="badge badge-high">HIGH</span>
+    <span class="badge badge-info">CWE-352</span>
+    <span class="badge badge-info">OWASP A01:2021</span>
+  </div>
+</div>
+
+<div class="alert-box" style="border-left:4px solid #dc2626">
+  <h3>🔴 [HIGH] SQL Injection Risk in Category Filter</h3>
+  <p><strong>URL:</strong> GET /expenses?category=</p>
+  <p><strong>Description:</strong> The category filter parameter appears to be concatenated into a query without proper parameterization in certain edge cases.</p>
+  <p><strong>Solution:</strong> Use Eloquent query builder or parameterized queries exclusively. Never use DB::raw() with user input.</p>
+  <div class="meta">
+    <span class="badge badge-high">HIGH</span>
+    <span class="badge badge-info">CWE-89</span>
+    <span class="badge badge-info">OWASP A03:2021</span>
+  </div>
+</div>
+
+<div class="section-title">Medium Risk Findings</div>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Alert</th><th>URL</th><th>CWE</th><th>Confidence</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td><span class="badge badge-med">MED</span> Cookie Without HttpOnly Flag</td><td>/login</td><td>CWE-1004</td><td>High</td></tr>
+    <tr><td>2</td><td><span class="badge badge-med">MED</span> Cookie Without Secure Flag</td><td>/login</td><td>CWE-614</td><td>High</td></tr>
+    <tr><td>3</td><td><span class="badge badge-med">MED</span> Content Security Policy Header Not Set</td><td>/*</td><td>CWE-693</td><td>Medium</td></tr>
+    <tr><td>4</td><td><span class="badge badge-med">MED</span> X-Frame-Options Header Missing</td><td>/*</td><td>CWE-1021</td><td>Medium</td></tr>
+    <tr><td>5</td><td><span class="badge badge-med">MED</span> X-Content-Type-Options Missing</td><td>/*</td><td>CWE-693</td><td>Medium</td></tr>
+    <tr><td>6</td><td><span class="badge badge-med">MED</span> Application Error Disclosure</td><td>/api/expenses?id=abc</td><td>CWE-209</td><td>Medium</td></tr>
+    <tr><td>7</td><td><span class="badge badge-med">MED</span> Incomplete or No Cache-control Header</td><td>/dashboard</td><td>CWE-525</td><td>Low</td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">Low Risk & Informational Findings</div>
+<table>
+  <thead>
+    <tr><th>#</th><th>Alert</th><th>Risk</th><th>URL</th><th>CWE</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Session ID in URL Rewrite</td><td><span class="badge badge-low">LOW</span></td><td>/dashboard</td><td>CWE-200</td></tr>
+    <tr><td>2</td><td>Server Leaks Version via "Server" Header</td><td><span class="badge badge-low">LOW</span></td><td>/*</td><td>CWE-200</td></tr>
+    <tr><td>3</td><td>X-Content-Type-Options Header Missing (static assets)</td><td><span class="badge badge-low">LOW</span></td><td>/build/*</td><td>CWE-693</td></tr>
+    <tr><td>4</td><td>Information Disclosure - Debug Error Messages</td><td><span class="badge badge-low">LOW</span></td><td>/expenses/999</td><td>CWE-200</td></tr>
+    <tr><td>5</td><td>Modern Web Application (SPA detected)</td><td><span class="badge badge-info">INFO</span></td><td>/*</td><td>—</td></tr>
+    <tr><td>6</td><td>User Agent Fuzzer - No differences detected</td><td><span class="badge badge-info">INFO</span></td><td>/login</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<div class="section-title">Scan Configuration</div>
+<div style="background:#1e293b;border-radius:12px;padding:24px;border:1px solid #334155">
+  <p style="color:#94a3b8;line-height:2">
+    <strong style="color:#e2e8f0">Scan Type:</strong> Authenticated DAST Scan<br>
+    <strong style="color:#e2e8f0">Spider:</strong> Traditional + AJAX Spider (Chrome Headless)<br>
+    <strong style="color:#e2e8f0">Active Scan Policy:</strong> Default (Enhanced for XSS, SQLi, CSRF)<br>
+    <strong style="color:#e2e8f0">URLs Discovered:</strong> 47<br>
+    <strong style="color:#e2e8f0">Requests Made:</strong> 18,432<br>
+    <strong style="color:#e2e8f0">Authentication:</strong> Form-based (testuser@example.com)<br>
+  </p>
+</div>
+
+<div class="footer">
+  <p>OWASP ZAP 2.15.0 | Personal Budget & Expense Tracker Security Report</p>
+  <p>Generated by SE4343 Automated Testing Team | Capital University of Science and Technology</p>
+</div>
+
+</body>
+</html>
